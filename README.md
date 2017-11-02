@@ -10,7 +10,13 @@
  * Author: Harsh Singhal
  */ 
 
+Version V1
+
 * This is a standard library for 16x2 LCD module for ATmel AVRs.
 * Currently 4 bit mode is not supported.
 * LCD.h contains all the functions while LCD.c contains their implementation.
 * Copy both files in the root directory of main.c and make changes to Makefile in order to use library.
+
+Version V1.01
+
+* Made Initializing of LCD easy to configure.

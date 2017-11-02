@@ -14,7 +14,7 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-//MPU : ATmega 8
+//** MPU : ATmega 8 **//
 
 #define F_CPU 1000000ul		// 1 MHz frequency of micro controller
 
@@ -26,42 +26,33 @@
 
 
 // BI-DIRECTIONAL DATA BUS ON LCD // 
-
-//Data direction register for Data Bus (DB0 - DB7) of LCD 
-#define DataDir			DDRD
+#define DataDir			DDRD	//Data direction register for Data Bus (DB0 - DB7) of LCD
 #define DataBus			PORTD
 
-
 // CONTROL LINES FOR LCD //
-
-//Data direction register for control lines (RS, RW, E) of LCD 
-#define	ControlDir		DDRC
+#define	ControlDir		DDRC	//Data direction register for control lines (RS, RW, E) of LCD
 #define Control			PORTC
 
-// RS = 0 => command mode (blinking cursor , 8 or 4 bit mode operation , clear screen etc.) (Refer datasheet for commands)
-// RS = 1 => data mode (send character or data to lcd)
-#define RS			PINC0
+#define RS				PINC0	// RS = 0 => command mode; RS = 1 => data mode
+#define RW				PINC1	// R/W = 0 => write mode (write to lcd); R/W = 1 => read mode (read from lcd (check busy etc))
+#define enable			PINC2	// Enable = 0 => sends data; Enable = 1 => preapare data
 
-//R/W = 0 => write mode (we will write or send data to lcd)
-//R/W = 1 => read mode (we will read data from lcd (to check busy and other flags))
-#define RW			PINC1
-
-//Enable = 1 => preapare data
-//Enable = 0 => sends data
-#define enable			PINC2
-
+//LCD Initial Settings
+#define Mode			1		// Mode = 0 => 4 Bit Mode; Mode = 1 => 8 Bit mode
+#define Line			1		// Line = 0 => 1 line mode; Line = 1 => 2 line mode
+#define Format			0		// Format = 0 => 5x8 dots format; Format = 1 => 5x11 dots format (Character Format)
+#define Display			1		// Display = 0 => Display OFF; Display = 1 => Display ON
+#define Cursor			1		// Cursor = 0 => Cursor OFF; Cursor = 1 => Cursor ON
+#define CursorBlink		1		// CursorBlink = 0 => Cursor will Not blink; CursorBlink = 1 => Cursor will blink
 
 //Basic Command Functions for lcd
 
-/**************************************************************************************************************************************************
-* Description : When data_length = 1 (8 Bit Bus mode)		When display_line = 1 (2 Line Mode)		When font_format = 1 (5x11 dots format)
-*				When data_length = 0 (4 Bit Bus mode)		When display_line = 0 (1 Line Mode)		When font_format = 0 (5x8 dots format)
+/************************************************************************************************************************
+* Description : It starts with a delay of 15ms i.e LCD startup or warmup time. Then we set LCD initial Settings above.
 *
 *				// 4 BIT MODE CURRENTLY NOT SUPPORTED
-*
-*				Additionally it has starting delay for LCD wake up(warm up) time and defines data direction register for data bus and control lines
-***************************************************************************************************************************************************/
-void LCD_init(unsigned char data_length, unsigned char display_line, unsigned char font_format);
+*************************************************************************************************************************/
+void LCD_init(void);
 
 /*********************************************************************************************
 * Description : Write "20H"(Space code) to DDRA and set DDRAM address to "00H" from AC
