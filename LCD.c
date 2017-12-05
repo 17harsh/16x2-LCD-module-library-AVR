@@ -63,11 +63,11 @@ void Display_shift(unsigned char SC, unsigned char RL){
 
 void Set_address(unsigned char line, unsigned char add){
 	if (line == 1){
-		Send_command(0x00+(add-1));
+		Send_command(0x80+(add-1));
 		_delay_us(50);
 	}
 	if (line == 2){
-		Send_command(0x40+(add-1));
+		Send_command(0xC0+(add-1));
 		_delay_us(50);
 	}
 }
