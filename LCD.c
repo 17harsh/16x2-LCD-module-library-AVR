@@ -88,7 +88,7 @@ void Flash_enable(){
 void Check_busy(){
 	DataDir = 0x00;
 	Control |= (1<<RW);
-	Control &= (1<<RS);
+	Control &= ~(1<<RS);
 	while(DataBus >= 0x80){
 		Flash_enable();
 	}
