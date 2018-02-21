@@ -20,3 +20,7 @@ Version V1
 Version V1.01
 
 * Made Initializing of LCD easy to configure.
+
+Version V1.02 (21/2/2018)
+
+*Fixed some bugs (Check_busy function is not correct)

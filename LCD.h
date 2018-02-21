@@ -28,22 +28,23 @@
 // BI-DIRECTIONAL DATA BUS ON LCD // 
 #define DataDir			DDRD	//Data direction register for Data Bus (DB0 - DB7) of LCD
 #define DataBus			PORTD
+#define DataRead		PIND
 
 // CONTROL LINES FOR LCD //
 #define	ControlDir		DDRC	//Data direction register for control lines (RS, RW, E) of LCD
 #define Control			PORTC
 
-#define RS				PINC0	// RS = 0 => command mode; RS = 1 => data mode
+#define RS				PINC2	// RS = 0 => command mode; RS = 1 => data mode
 #define RW				PINC1	// R/W = 0 => write mode (write to lcd); R/W = 1 => read mode (read from lcd (check busy etc))
-#define enable			PINC2	// Enable = 0 => sends data; Enable = 1 => preapare data
+#define enable			PINC0	// Enable = 0 => sends data; Enable = 1 => preapare data
 
 //LCD Initial Settings
 #define Mode			1		// Mode = 0 => 4 Bit Mode; Mode = 1 => 8 Bit mode
 #define Line			1		// Line = 0 => 1 line mode; Line = 1 => 2 line mode
 #define Format			0		// Format = 0 => 5x8 dots format; Format = 1 => 5x11 dots format (Character Format)
 #define Display			1		// Display = 0 => Display OFF; Display = 1 => Display ON
-#define Cursor			1		// Cursor = 0 => Cursor OFF; Cursor = 1 => Cursor ON
-#define CursorBlink		1		// CursorBlink = 0 => Cursor will Not blink; CursorBlink = 1 => Cursor will blink
+#define Cursor			0		// Cursor = 0 => Cursor OFF; Cursor = 1 => Cursor ON
+#define CursorBlink		0		// CursorBlink = 0 => Cursor will Not blink; CursorBlink = 1 => Cursor will blink
 
 //Basic Command Functions for lcd
 

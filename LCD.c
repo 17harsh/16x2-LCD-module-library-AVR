@@ -18,7 +18,7 @@
 void LCD_init(void){
 	_delay_ms(15);													//LCD warm up (wake up) time
 	DataDir = 0xff;													//configuring data bus to output		 
-	ControlDir |= (1<<enable)|(1<<RS)|(1<<RW);						//configuring control lines to output
+	ControlDir |= ((1<<enable)|(1<<RS)|(1<<RW));						//configuring control lines to output
 	unsigned char temp;
 	temp = ((0x20) | (Mode<<4) | (Line<<3) | (Format<<2));			//command as specified in datasheet
 	Send_command(temp);																						
@@ -85,35 +85,38 @@ void Flash_enable(){
 	Control &= ~(1<<enable);
 }
 
+/* ***THIS FUNCTION IS CURRENTLY NOT WORKING***
+
 void Check_busy(){
 	DataDir = 0x00;
 	Control |= (1<<RW);
 	Control &= ~(1<<RS);
-	while(DataBus >= 0x80){
+	while(DataRead >= 0x80){
 		Flash_enable();
 	}
-	DataBus = 0x00;
+	//DataBus = 0x00;
 }
+*/
 
 void Send_command(unsigned char command){
-	Check_busy();
+	//Check_busy();
 	DataDir = 0xff;
 	Control &= ~((1<<RS)|(1<<RW));
 	DataBus = command;
 	Flash_enable();
-	DataDir = 0x00;
+	//DataDir = 0x00;
 	DataBus = 0x00;
 }
 
 void Send_character(unsigned char character){
-	Check_busy();
+	//Check_busy();
 	DataDir = 0xff;
 	Control |= (1<<RS);
 	Control &= ~(1<<RW);
 	DataBus = character;
 	Flash_enable();
 	_delay_us(50);
-	DataDir = 0x00;
+	//DataDir = 0x00;
 	DataBus = 0x00;
 }
 
